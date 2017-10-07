@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.customexceptionhandling.CustomDaoException;
 import com.example.dao.UserDao;
 import com.example.model.User;
 
@@ -16,7 +17,7 @@ public class UserService {
 	UserDao userDao;
 	
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.DEFAULT)
-	public String createUser(User user){
+	public String createUser(User user) throws CustomDaoException{
 		return userDao.createUser(user);
 	}
 }

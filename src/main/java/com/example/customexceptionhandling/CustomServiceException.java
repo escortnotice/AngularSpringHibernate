@@ -5,7 +5,7 @@ public class CustomServiceException extends CustomBaseException{
 	private static final long serialVersionUID = 1L;
 
 	public CustomServiceException() {
-		super("BaseServiceException Occured");
+		super("CustomServiceException Occured");
 	}
 
 	public CustomServiceException(String message) {

@@ -1,6 +1,6 @@
 package com.example.customexceptionhandling;
 
-public class CustomBaseException extends Exception {
+public class CustomBaseException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
