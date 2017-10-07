@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- To scan the .java files for identifying beans tagged as @Controller,@Repository,@Service 
+		and @Component and register the beans -->
+	<context:component-scan base-package="com.example" />
+
+	<!-- It enables the annotation @Controller and others -->
+	<mvc:annotation-driven />
+
+<!-- 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"  -->
+<!--     p:prefix="/WEB-INF/view/" p:suffix="" /> -->
+	
+	<!-- to serve static contents -->
+	<mvc:resources mapping="/resources/**" location="/resources/"
+		cache-period="31556926" />
+	<!-- /. to serve static contents -->
+	<!-- /. Resolving views -->
+
+	<!-- Using message file for internationalization -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	<!-- /. Using message file for internationalization -->
+
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+		p:location="classpath:application.properties" />
+	<!-- /. Using Properties file -->
+
+
+	<!-- creating the datasource for establishing database connection -->
+	<!-- ======== create datasource using Hard coding db connection details 
+		=============== -->
+		<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
+		<!-- destroy-method="close" p:driverClassName="${jdbc.driverClassName}" -->
+		<!-- p:url="${jdbc.databaseurl}" p:username="${jdbc.username}" p:password="${jdbc.password}" 
+			/> -->
+		<!-- ======== /. Hard coding db connection details =============== -->
+	
+		<!-- ======== create the datasource Using JNDI =============== -->
+		<!-- Oracle DB -->
+		<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" -->
+		<!-- scope="singleton" lazy-init="true"> -->
+		<!-- <property name="jndiName" value="java:/OracleDBLocal1" /> -->
+		<!-- </bean> -->
+	
+		<!-- MySQL DB -->
+		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"
+			scope="singleton" lazy-init="true">
+			<property name="jndiName" value="java:/MySqlDS" />
+		</bean>
+	<!-- ======== /. Using JNDI =============== -->
+	
+	<!-- 2. creating the sessionfactory object used for database interactions 
+		and inject the sessionfactory objects in dao -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation">
+			<value>classpath:hibernate.cfg.xml</value>
+		</property>
+		<!-- will scan the entity objects @Entity, if this is provided no need to add an entry to hibernate.cfg.xml file -->
+		<property name="packagesToScan" value="com.example.model" />
+	</bean>
+
+	<!-- configure transaction manager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- /.configure transaction manager -->
+	
+	<!-- Registering bean for JavaMail api -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"></bean>
+	
+	
+
+</beans>
