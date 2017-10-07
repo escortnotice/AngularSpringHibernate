@@ -5,20 +5,17 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.User;
+import com.example.model.UserType;
 
 @Repository
-public class UserDao {
+public class UserTypeDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	//creates a new user
-	public String createUser(User user) {
+	public UserType getUserType(long id){
+		
 		Session session = sessionFactory.getCurrentSession();
-		session.save(user);
-		return "OK";
+		return (UserType)session.get(UserType.class, id);
 	}
-
-	
 }

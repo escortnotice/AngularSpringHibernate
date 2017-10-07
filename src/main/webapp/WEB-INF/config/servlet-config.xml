@@ -58,7 +58,7 @@
 		<!-- MySQL DB -->
 		<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"
 			scope="singleton" lazy-init="true">
-			<property name="jndiName" value="java:/MySqlDS" />
+			<property name="jndiName" value="java:/StoreManagementDS" />
 		</bean>
 	<!-- ======== /. Using JNDI =============== -->
 	
