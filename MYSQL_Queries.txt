@@ -66,14 +66,14 @@ CREATE TABLE SALES(
 	FOREIGN KEY(PAYMENT_TYPE_ID) REFERENCES PAYMENT_TYPE(ID)
 );
 ---------------------------------------------------------------------------------
-Alter Table:
+-- Alter Table:
 
-1) alter table usertype change column type USER_TYPE varchar(20);
+alter table usertype change column type USER_TYPE varchar(20);
 --------------------------------------------------------------------------------
 
-Insert Queries:
+-- Insert Queries:
 
-1) insert into payment_type (MODE_OF_PAYMENT) values('CASH');
-2) insert into usertype (user_type) values ('ADMIN');
-3) insert into usertype (user_type) values ('CASHIER');
+insert into payment_type (MODE_OF_PAYMENT) values('CASH');
+insert into usertype (user_type) values ('ADMIN');
+insert into usertype (user_type) values ('CASHIER');
 ---------------------------------------------------------------------------------
