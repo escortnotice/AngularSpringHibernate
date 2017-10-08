@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -15,6 +17,8 @@ public class UserService {
 
 	@Autowired 
 	UserDao userDao;
+	@Autowired
+	UserTypeService userTypeService;
 	
 	/**
 	 * The Custom Dao exception thrown should be a subclass of Unchecked exception, else the exception
@@ -26,6 +30,10 @@ public class UserService {
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,isolation=Isolation.DEFAULT,rollbackFor=CustomDaoException.class)
 	public String createUser(User user) throws CustomDaoException{
+		//add user creation time
+		user.setCreationDate(new Timestamp(System.currentTimeMillis()));
+		//get the UserType object
+		user.setUserType(userTypeService.getUserType(1l));
 		return userDao.createUser(user);
 	}
 }
