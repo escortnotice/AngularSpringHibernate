@@ -1,6 +1,5 @@
 package com.example.model;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -13,37 +12,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.ColumnDefault;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name="USER")
+@Table(name = "USER")
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator="user_id_seq_gen")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_id_seq_gen")
 	@SequenceGenerator(name = "user_id_seq_gen", sequenceName = "user_id_seq", allocationSize = 1)
-	@Column(name="ID",unique = true, nullable = false,length = 20)
+	@Column(name = "ID", unique = true, nullable = false, length = 20)
 	private long userId;
-	
-	@Column(name="USERNAME",length=15,nullable=false,unique=true)
+
+	@Column(name = "USERNAME", length = 15, nullable = false, unique = true)
 	private String username;
-	
-	@Column(name="PASSWORD",length=15,nullable=false)
+
+	@Column(name = "PASSWORD", length = 15, nullable = false)
 	private String password;
-	
-	@Column(name="CREATIONDATE",nullable=false)
+
+	@Column(name = "CREATIONDATE", nullable = false)
 	private Timestamp creationDate;
-	
-	@Column(name="ISACTIVE")
+
+	@Column(name = "ISACTIVE")
 	private boolean isActive = true;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="USERTYPE_ID",nullable=false)
+
+	@Transient
+	private String userTypeValue;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "USERTYPE_ID", nullable = false)
 	private UserType userType;
 
-
-	//setters and getters
+	// setters and getters
 	public long getUserId() {
 		return userId;
 	}
@@ -92,7 +92,12 @@ public class User {
 		this.isActive = isActive;
 	}
 
-	
-	
-	
+	public String getUserTypeValue() {
+		return userTypeValue;
+	}
+
+	public void setUserTypeValue(String userTypeValue) {
+		this.userTypeValue = userTypeValue.toUpperCase();
+	}
+
 }

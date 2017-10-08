@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.customexceptionhandling.CustomDaoException;
 import com.example.dao.UserDao;
 import com.example.model.User;
+import com.example.model.UserType;
+import com.example.util.MasterTableDBValues;
 
 @Service
 public class UserService {
@@ -32,8 +34,8 @@ public class UserService {
 	public String createUser(User user) throws CustomDaoException{
 		//add user creation time
 		user.setCreationDate(new Timestamp(System.currentTimeMillis()));
-		//get the UserType object
-		user.setUserType(userTypeService.getUserType(1l));
+		//get the UserType object from the Master Map which is loaded during application startup during restart
+		user.setUserType((UserType)MasterTableDBValues.masterTableMap.get("UserType").get(user.getUserTypeValue()));
 		return userDao.createUser(user);
 	}
 }

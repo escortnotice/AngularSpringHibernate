@@ -39,11 +39,11 @@ public class UserType {
 	}
 
 	public String getTypeOfUser() {
-		return typeOfUser;
+		return typeOfUser.toUpperCase();
 	}
 
 	public void setTypeOfUser(String typeOfUser) {
-		this.typeOfUser = typeOfUser;
+		this.typeOfUser = typeOfUser.toUpperCase();
 	}
 
 	public Set<User> getUsers() {
