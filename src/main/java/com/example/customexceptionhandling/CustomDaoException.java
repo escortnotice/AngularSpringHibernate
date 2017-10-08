@@ -5,7 +5,7 @@ public class CustomDaoException extends CustomBaseException{
 	private static final long serialVersionUID = 1L;
 
 	public CustomDaoException() {
-		super("BaseDaoException Occured");
+		super("CustomDaoException Occured");
 	}
 
 	public CustomDaoException(String message) {

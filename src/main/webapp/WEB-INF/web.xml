@@ -7,11 +7,11 @@
 
 	<!-- Spring web-application context configuration (Spring MVC configuration) -->
 	<servlet>
-		<servlet-name>springMVC4ExampleServlet</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/servlet-config.xml</param-value>
+			<param-value>/WEB-INF/config/spring-servlet.xml</param-value>
 		</init-param>
 	</servlet>
 	<!-- /. Spring web-application context configuration -->
@@ -19,7 +19,7 @@
 	<!-- URL Pattern mapping to used to invoke the spring DispatcherServlet 
 		(Spring MVC configuration) -->
 	<servlet-mapping>
-		<servlet-name>springMVC4ExampleServlet</servlet-name>
+		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<!-- URL Pattern mapping to used to invoke the spring DispatcherServlet -->

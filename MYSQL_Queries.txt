@@ -7,7 +7,7 @@ SHOW CREATE TABLE <tableName>;  -- to see ddl statement for a table in mysql
 -- 1# USERTYPE Table
 CREATE TABLE  USERTYPE(
 	USERTYPE_ID bigint(20) NOT NULL AUTO_INCREMENT,  -- surrogate key
-	TYPE varchar(30) NOT NULL,
+	USER_TYPE varchar(20) NOT NULL,
 	PRIMARY KEY (USERTYPE_ID)
 );
 
@@ -65,4 +65,15 @@ CREATE TABLE SALES(
 	FOREIGN KEY(PRODUCT_ID) REFERENCES PRODUCT(PRODUCT_ID),
 	FOREIGN KEY(PAYMENT_TYPE_ID) REFERENCES PAYMENT_TYPE(ID)
 );
+---------------------------------------------------------------------------------
+Alter Table:
+
+1) alter table usertype change column type USER_TYPE varchar(20);
+--------------------------------------------------------------------------------
+
+Insert Queries:
+
+1) insert into payment_type (MODE_OF_PAYMENT) values('CASH');
+2) insert into usertype (user_type) values ('ADMIN');
+3) insert into usertype (user_type) values ('CASHIER');
 ---------------------------------------------------------------------------------

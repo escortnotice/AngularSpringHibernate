@@ -19,7 +19,7 @@ public class ExceptionHandlerAdvice {
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public String handleException(CustomBaseException e) {
-		logger.error("Caught CustomBaseException {}", e);
+		logger.error("Caught CustomBaseException in ExceptionHandlerAdvice class:" , e);
 		return NOT_OK;
 	}
 }
