@@ -13,6 +13,10 @@
 		and @Component and register the beans -->
 	<context:component-scan base-package="com.example" />
 
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+ <property name="prefix" value="/WEB-INF/config/"></property>
+ <property name="suffix" value=".jsp"></property>
+</bean>
 	<!-- It enables the annotation @Controller and others -->
 	<mvc:annotation-driven />
 

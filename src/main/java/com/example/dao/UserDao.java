@@ -1,5 +1,8 @@
 package com.example.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,6 +44,83 @@ public class UserDao {
 		} catch (HibernateException ex) {
 			logger.error("Error Occured while saving user to Database: " + ex);
 			throw new CustomDaoException("Error Occured while saving user to Database: " + ex);
+		}
+	}
+
+	public User getUser(long userId) throws CustomDaoException{
+		Session session=null;
+		try{
+			session=sessionFactory.getCurrentSession();
+			return ((User)session.get(User.class, userId));
+		} catch(HibernateException e)
+		{
+			logger.error("Exception occured in getting user data: "+ e);
+			throw new CustomDaoException("Exception occured in getting user data: "+ e);
+		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User> getAllUsers() throws CustomDaoException{
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			return session.createQuery("FROM User").list();
+		} catch(HibernateException e)
+		{
+			logger.error("Exception occured in geting all user records");
+			throw new CustomDaoException("Exception occured in geting all user records"+e);
+		}
+	}
+	
+
+	public String deleteUser(User user) throws CustomDaoException {
+		// TODO Auto-generated method stub
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			session.delete(user);
+			return "Deleted";
+		}catch(HibernateException e)
+		{
+			logger.error("exception occured while deleting user");
+			throw new CustomDaoException("Exception occured while deleting user"+e);
+		}
+	}
+
+	/*public List<User> getUsersOfUserType() throws CustomDaoException{
+		try{
+			Session sesion= sessionFactory.getCurrentSession();
+			return ((User)session.get(UserType.class, userType));
+			
+		}catch(HibernateException e)
+		{
+			logger.error("Exception occured in getting usertype users");
+			throw new CustomDaoException("Exception occured in getting usertype users"+e);
+		}
+	}*/
+	
+	public String updateUser(User user) throws CustomDaoException {
+		// TODO Auto-generated method stub
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			session.update(user);
+			return "updated";
+		}catch(HibernateException e)
+		{
+			logger.error("exception occured while updating user");
+			throw new CustomDaoException("Exception occured while updating user"+e);
+		}
+	}
+	
+	public String updUser(User updatedUser) throws CustomDaoException {
+		try{
+			Session session=sessionFactory.getCurrentSession();
+			session.update(updatedUser);
+			return "User successfully Updated";
+			
+		}catch(HibernateException e)
+		{
+			logger.error("Error in updating user");
+			throw new CustomDaoException("Exception in updating user"+e);
 		}
 	}
 

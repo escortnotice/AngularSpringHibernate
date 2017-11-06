@@ -18,4 +18,10 @@ public class UserTypeService {
 	public UserType getUserType(long id) throws CustomDaoException{
 		return userTypeDao.getUserType(id);
 	}
+	
+	
+	@Transactional(readOnly=true)
+	public UserType geTypeOfUsers(String typeOfUser) throws CustomDaoException{
+		return userTypeDao.getTypeofUsers(typeOfUser);
+	}
 }

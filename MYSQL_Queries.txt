@@ -10,7 +10,7 @@ CREATE TABLE  USERTYPE(
 	USER_TYPE varchar(20) NOT NULL,
 	PRIMARY KEY (USERTYPE_ID)
 );
-
+	
 -- 2# USER Table:
 CREATE TABLE  USER(
    ID bigint(20) NOT NULL AUTO_INCREMENT,   -- surrogate key

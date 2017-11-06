@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="USERTYPE")
 public class UserType {
@@ -26,7 +28,8 @@ public class UserType {
 	@Column(name= "USER_TYPE",unique = true, nullable = false,length = 20)
 	private String typeOfUser;
 	
-	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL,mappedBy="userType") //mapped by says it is the inverse side of the relationship
+	@OneToMany(fetch=FetchType.EAGER,mappedBy="userType") //mapped by says it is the inverse side of the relationship
+	//@JsonIgnore
 	private Set<User> users;
 
 	//setters and getters

@@ -2,6 +2,7 @@ package com.example.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -100,4 +101,9 @@ public class User {
 		this.userTypeValue = userTypeValue.toUpperCase();
 	}
 
+	public void setUser(User  user)
+	{
+		this.username=user.getUsername();
+		this.password=user.getPassword();
+	}
 }
