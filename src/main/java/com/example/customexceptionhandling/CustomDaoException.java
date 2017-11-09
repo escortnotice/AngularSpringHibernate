@@ -5,19 +5,19 @@ public class CustomDaoException extends CustomBaseException{
 	private static final long serialVersionUID = 1L;
 
 	public CustomDaoException() {
-		super("CustomDaoException Occured");
+		super();
 	}
 
 	public CustomDaoException(String message) {
 		super(message);
 	}
 
-	public CustomDaoException(Throwable e) {
-		super(e);
+	public CustomDaoException(Throwable cause) {
+		super(cause);
 	}
 
-	public CustomDaoException(String message, Throwable e) {
-		super(message + e);
+	public CustomDaoException(String message, Throwable cause) {
+		super(message , cause);
 	}
 	
 	

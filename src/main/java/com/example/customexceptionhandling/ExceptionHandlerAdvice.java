@@ -1,5 +1,9 @@
 package com.example.customexceptionhandling;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
+import java.sql.SQLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,7 +23,16 @@ public class ExceptionHandlerAdvice {
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
 	@ResponseBody
 	public String handleException(CustomBaseException e) {
-		logger.error("Caught CustomBaseException in ExceptionHandlerAdvice class:" , e);
+		logger.error("Caught CustomBaseException in ExceptionHandlerAdvice class: " , e);
+		//to check for a specific exception
+		checkSpecificException(e);
 		return NOT_OK;
+	}
+	
+	public void checkSpecificException(Exception e){
+		
+		if(e.getCause() instanceof SQLException){
+			logger.error("Error in Sql statement:" + e.getMessage());
+		}
 	}
 }
