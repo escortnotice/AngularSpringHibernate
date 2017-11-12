@@ -29,7 +29,7 @@ public class ExceptionHandlerAdvice {
 		return NOT_OK;
 	}
 	
-	public void checkSpecificException(Exception e){
+	public void checkSpecificException(CustomBaseException e){
 		
 		if(e.getCause() instanceof SQLException){
 			logger.error("Error in Sql statement:" + e.getMessage());

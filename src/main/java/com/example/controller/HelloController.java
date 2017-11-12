@@ -2,7 +2,6 @@ package com.example.controller;
 
 import java.sql.SQLException;
 
-import org.hibernate.HibernateException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
