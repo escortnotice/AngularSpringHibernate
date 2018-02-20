@@ -37,6 +37,7 @@
 	</bean>
 	<!-- /. Using message file for internationalization -->
 
+	<!-- Using Properties file -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
 		p:location="classpath:application.properties" />
