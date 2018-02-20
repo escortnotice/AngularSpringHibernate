@@ -1,0 +1,1 @@
+This folder has libraries and configuration to connect to MySQl from JBoss App Server.

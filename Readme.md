@@ -4,4 +4,4 @@
 * Hibernate 4.X
 * Spring 4.x
 * MySQL
-
+* Custom Exception and ControllerAdvice for exceptions
